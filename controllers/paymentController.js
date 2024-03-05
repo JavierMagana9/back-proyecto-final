@@ -33,17 +33,17 @@ console.log("numero del front",numero*30)
         success_url: 'http://localhost:5173/profile'
     })
 
-    const customer = await stripe.customers.create({
-        metadata: {
-            dateStart: "02-03-2024",
-            dateEnd: "03-03-2024"
-        }
+    // const customer = await stripe.customers.create({
+    //     metadata: {
+    //         dateStart: "02-03-2024",
+    //         dateEnd: "03-03-2024"
+    //     }
 
 
-    })
+    // })
 
     console.log(session)
-    console.log(customer)
+    // console.log(customer)
     return res.json(session)
 }
 

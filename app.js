@@ -13,6 +13,7 @@ app.use(cors())
 
 app.use('/api/v1',require('./routers/paymentRouters'))
 app.use('/api/v1/calendar',require('./routers/calendarRouter'))
+app.use('/api/v1/users',require('./routers/usersRouter'))
 // app.use('/api-calendar/v1', require('./routers/calendarRouter'))
 //app.use('/api/v1', require(''))
 //app.use('/api/v1', require(''))
