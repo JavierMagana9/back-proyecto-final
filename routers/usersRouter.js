@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const {getUsuarios,postCrearUsuario}= require('../controllers/userController')
+const {getUsuarios,postCrearUsuario,getId}= require('../controllers/userController')
 
 router.get('/ver-usuarios',getUsuarios)
 
-// router.get('/ver-usuario')
+router.get('/:id',getId)
 
 router.post('/crear-usuario',postCrearUsuario)
 

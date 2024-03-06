@@ -10,7 +10,7 @@ const getTodosUsuarios = async () => {
     try {
         cliente = await pool.connect();
         resultado = await cliente.query(queriesAllUser.querieSelectAllUser);
-      console.log(queriesAllUser)
+    //   console.log(queriesAllUser)
     } catch (error) {
         console.log(error)
         throw new Error('error de conexion')
@@ -39,9 +39,35 @@ const crearUsuario = async (body) => {
     return result
 }
 
+const getSelectId = async (id) => {
+
+    console.log("en queries",id)
+ 
+    let cliente,
+      
+        resultado
+    try {
+       
+        cliente = await pool.connect();
+       
+        resultado = await cliente.query(queriesAllUser.querieSelectId,[id]);
+        
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+        
+        cliente.release()
+    }
+    //estoy enviado todos los datos que estan alojados en el Array rows
+    return resultado.rows
+}
+
+
 
 
 module.exports={
     getTodosUsuarios,
-    crearUsuario
+    crearUsuario,
+    getSelectId
 }

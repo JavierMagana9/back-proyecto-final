@@ -30,11 +30,11 @@ const getTodasReservas = async () => {
 
 const crearReserva = async (body) => {
     let client, result
-    const { id_reserva, id_usuario, date_start, date_end, id_pago } = body
+    const { id_reserva, id_usuario, date_start, date_end, ref_pago, sala } = body
     //console.log("body en el modelo",body)
     try {
         client = await pool.connect()
-        result = client.query(queriesAll.querieCrearReserva, [id_reserva, id_usuario, date_start, date_end, id_pago])
+        result = client.query(queriesAll.querieCrearReserva, [id_reserva, id_usuario, date_start, date_end, ref_pago, sala])
 
     } catch (error) {
         console.log(error)
