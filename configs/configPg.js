@@ -2,7 +2,8 @@ const { Pool } = require('pg')
 
 const pool = new Pool(    
     {
-    connectionString:'postgresql://postgres:1234@localhost:5432/proyectoFinal',
+    connectionString:process.env.BBDDEXTERNAL,
+    ssl:process.env.SSLEXTERNAL
 })
 
 module.exports=pool

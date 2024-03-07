@@ -1,21 +1,21 @@
-const pool =require('../configs/configPg')
+const pool = require('../configs/configPg')
 const queriesAllUser = require('./queriesUsers')
 
 
 const getTodosUsuarios = async () => {
-    
+
     let cliente,
-       
+
         resultado
     try {
         cliente = await pool.connect();
         resultado = await cliente.query(queriesAllUser.querieSelectAllUser);
-    //   console.log(queriesAllUser)
+        //   console.log(queriesAllUser)
     } catch (error) {
         console.log(error)
         throw new Error('error de conexion')
     } finally {
-        
+
         cliente.release()
     }
 
@@ -41,22 +41,22 @@ const crearUsuario = async (body) => {
 
 const getSelectId = async (id) => {
 
-    console.log("en queries",id)
- 
+    console.log("en queries", id)
+
     let cliente,
-      
+
         resultado
     try {
-       
+
         cliente = await pool.connect();
-       
-        resultado = await cliente.query(queriesAllUser.querieSelectId,[id]);
-        
+
+        resultado = await cliente.query(queriesAllUser.querieSelectId, [id]);
+
     } catch (error) {
         console.log(error)
         throw new Error('error de conexion')
     } finally {
-        
+
         cliente.release()
     }
     //estoy enviado todos los datos que estan alojados en el Array rows
@@ -64,10 +64,48 @@ const getSelectId = async (id) => {
 }
 
 
+const putUsuario = async (body, id_usuario) => {
+
+    let client,
+        result
+    const { nickname, email } = body
+
+    try {
+        client = await pool.connect();
+        result = await client.query(queriesAllUser.querieUpdateUser, [nickname, email, id_usuario]);
+
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+        client.release()
+    }
+
+    return result
+}
 
 
-module.exports={
+const deleteUsuario = async (id) => {
+    console.log("deleteUsuario", id)
+    let client, result
+    try {
+        client = await pool.connect();
+        result = await client.query(queriesAllUser.querieDeleteId, [id]);
+
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+        client.release()
+    }
+    return result
+}
+
+
+module.exports = {
     getTodosUsuarios,
     crearUsuario,
-    getSelectId
+    getSelectId,
+    deleteUsuario,
+    putUsuario
 }
