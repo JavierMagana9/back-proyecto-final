@@ -4,6 +4,8 @@ const { getTodosUsuarios, crearUsuario, getSelectId, deleteUsuario,putUsuario} =
 // VER TODOS LOS USUARIOS
 const getUsuarios = async (req, res) => {
 
+    const page=req.query
+    console.log("en ver usuario",page)
     try {
         const data = await getTodosUsuarios()
         // console.log("dentro", data)
@@ -16,6 +18,8 @@ const getUsuarios = async (req, res) => {
         }
         return res.status(200).json({
             error: false,
+            totalResult:data.length,
+            perPages:20,
             data
         })
     } catch (error) {
@@ -100,9 +104,9 @@ const eliminarUsuario = async (req, res) => {
 const actualizarUsuario = async(req,res)=>{
     try {
         const id_usuario = req.params.id
-        const { nickname, email } = req.body
+        const { nickname, email, rol, estado } = req.body
 
-        console.log("en actualizar",nickname,email)
+        console.log("en actualizar",nickname, email, rol, estado)
         console.log("id en actualizar usuario",id_usuario)
 
 
