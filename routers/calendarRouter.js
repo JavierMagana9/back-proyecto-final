@@ -1,11 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const{postCrearReserva,getReservas,getEventos}=require('../controllers/calendarController')
 
 
 
-router.get('')
+router.get('/ver-reservas',getReservas)
 
-router.post('')
+router.get('/ver-eventos',getEventos)
+
+router.post('/crear-reserva',postCrearReserva)
 
 router.put('')
 
