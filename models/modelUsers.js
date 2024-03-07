@@ -24,11 +24,11 @@ const getTodosUsuarios = async () => {
 
 const crearUsuario = async (body) => {
     let client, result
-    const { id_usuario, nickname, email, rol } = body
+    const { id_usuario, nickname, email, rol, estado } = body
     //console.log("body en el modelo",body)
     try {
         client = await pool.connect()
-        result = client.query(queriesAllUser.querieCrearUsuario, [id_usuario, nickname, email, rol])
+        result = client.query(queriesAllUser.querieCrearUsuario, [id_usuario, nickname, email, rol, estado])
 
     } catch (error) {
         console.log(error)
@@ -68,11 +68,11 @@ const putUsuario = async (body, id_usuario) => {
 
     let client,
         result
-    const { nickname, email } = body
+    const { nickname, email, rol, estado } = body
 
     try {
         client = await pool.connect();
-        result = await client.query(queriesAllUser.querieUpdateUser, [nickname, email, id_usuario]);
+        result = await client.query(queriesAllUser.querieUpdateUser, [nickname, email, rol, estado, id_usuario]);
 
     } catch (error) {
         console.log(error)

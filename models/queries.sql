@@ -1,16 +1,17 @@
 
-
 CREATE TABLE usuarios (
 	id_usuario varchar(100) NOT NULL PRIMARY KEY,
 	nickname varchar(100) NOT NULL,
 	email varchar(100) NOT NULL,
 	rol varchar(100)NOT NULL,
-	date date DEFAULT CURRENT_DATE	
+	estado varchar(100) NOT NULL,
+	date date DEFAULT CURRENT_DATE,
+	estado varchar(50)
 );
 
-INSERT INTO usuarios(id_usuario, nickname, email, rol)
+INSERT INTO usuarios(id_usuario, nickname, email, rol, estado)
 VALUES
-('123456', 'pepe','pepe@pepe.es', 'user_reg')
+('123456', 'pepe','pepe@pepe.es', 'user_reg', 'true')
 
 --====================================================================================
 
@@ -63,3 +64,8 @@ UPDATE usuarios
 SET nickname = 'javiermagana',
 email = 'javiermagana@javiermagana.com'
 WHERE id_usuario='123443'
+
+
+--============================================
+
+ALTER TABLE usuarios ADD estado varchar(50)
