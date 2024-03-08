@@ -39,7 +39,7 @@ const postCrearUsuario = async (req, res) => {
         // console.log(req.body)
 
         respuesta = await crearUsuario(req.body)
-        console.log(req.body)
+        // console.log(req.body)
         return res.status(201).json({
             error: false,
             msg: ['Se creo el usuario']
@@ -57,9 +57,9 @@ const getId = async (req, res) => {
 
     try {
         const id = req.params.id
-        console.log("esto es el id",id)
+        // console.log("esto es el id",id)
         const data = await getSelectId(id)
-        console.log("dentro", data)
+        // console.log("dentro", data)
 
         if (!data) {
             return res.status(400).json({

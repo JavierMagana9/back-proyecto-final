@@ -66,8 +66,70 @@ const getEventReservas = async () => {
     return resultado.rows
 }
 
+const getSelectReserva = async (id_reserva) => {
+
+    console.log("en queries", id_reserva)
+
+    let cliente,
+        resultado
+    try {
+        cliente = await pool.connect();
+        resultado = await cliente.query(queriesAll.querieSelectReserva, [id_reserva]);
+
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+        cliente.release()
+    }
+    return resultado.rows
+}
+
+const putReserva = async (body, id_reserva) => {
+
+    let client,
+        result
+    const { date_start, date_end, ref_pago, sala } = body
+
+    try {
+        client = await pool.connect();
+        result = await client.query(queriesAll.querieUpdateReserva, [date_start, date_end, ref_pago, sala, id_reserva]);
+
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+        client.release()
+    }
+
+    return result
+}
+
+const deleteReserva = async (id_reserva) => {
+    console.log("deleteUsuario", id_reserva)
+    let client, result
+    try {
+        client = await pool.connect();
+        result = await client.query(queriesAll.querieDeleteReserva, [id_reserva]);
+
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+        client.release()
+    }
+    return result
+}
+
+
+
+
+
 module.exports={
     crearReserva,
     getTodasReservas,
-    getEventReservas
+    getEventReservas,
+    getSelectReserva,
+    putReserva,
+    deleteReserva
 }
