@@ -11,6 +11,9 @@ const queriesAll = {
                                   sala= $4
                        WHERE id_reserva=$5`,
    querieDeleteReserva: `DELETE FROM reservas
-    WHERE id_reserva=$1`                  
+    WHERE id_reserva=$1`,
+    querieSelectmyEvent: 'SELECT * FROM reservas WHERE id_usuario = $1'
+
+
 }
 module.exports = queriesAll

@@ -69,3 +69,32 @@ WHERE id_usuario='123443'
 --============================================
 
 ALTER TABLE usuarios ADD estado varchar(50)
+
+--======================================
+
+CREATE TABLE salas (
+	id_sala serial NOT NULL PRIMARY KEY,
+	num_sala serial,
+	id_reserva varchar(100),
+	FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva)
+);
+INSERT INTO salas(id_sala, num_sala, id_reserva)
+VALUES
+(1,1,'3333333')
+
+--===================================================
+
+CREATE TABLE anuncios (
+	id_anuncio varchar(100) NOT NULL PRIMARY KEY,
+	id_usuario varchar(100) NOT NULL,
+	titulo varchar(200),
+    descripcion varchar(200),
+	precio varchar(50),
+	contacto varchar(100),
+	date date DEFAULT CURRENT_DATE,
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+INSERT INTO anuncios(id_anuncio, id_usuario, titulo, descripcion, precio, contacto)
+VALUES
+('123456','auth0|65e39bc933c950252effbffc','vendo guitarra', 'se vende guitarra de arca fender','300€', 'prueba@prueba.com')
