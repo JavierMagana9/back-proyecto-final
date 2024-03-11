@@ -5,12 +5,12 @@ const stripe = new Stripe('sk_test_51OmgPMCmZfq7z36s0bbAiXm8l38UGRptqo7bZadRc2n1
 
 const createSession = async (req, res) => {
 
-const number=req.body
-const {numero}=req.body
+    const number = req.body
+    const { numero } = req.body
 
-console.log("numero del front",number)
-console.log("numero del front",numero)
-console.log("numero del front",numero*30)
+    console.log("numero del front", number)
+    console.log("numero del front", numero)
+    console.log("numero del front", numero * 30)
     const session = await stripe.checkout.sessions.create({
         line_items: [
             {
@@ -20,7 +20,7 @@ console.log("numero del front",numero*30)
                         description: "Esta es la descripcion de la sala de ensayo"
                     },
                     currency: 'eur',
-                    unit_amount: numero*3000, //el precio se coloca en centavos
+                    unit_amount: numero * 3000, //el precio se coloca en centavos
                 },
                 quantity: 1,
                 // metadata:{
@@ -29,8 +29,12 @@ console.log("numero del front",numero*30)
                 // }
             }
         ],
+        metadata: {
+            prueba: "esta llegando",
+            cantidad: numero
+        },
         mode: 'payment', // aca se puede cambiar por subscripcion
-        success_url: 'http://localhost:5173/profile'
+        success_url: 'http://localhost:5173/reservas'
     })
 
     // const customer = await stripe.customers.create({

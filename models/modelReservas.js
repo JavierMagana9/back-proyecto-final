@@ -121,6 +121,27 @@ const deleteReserva = async (id_reserva) => {
     return result
 }
 
+const getMyReservas = async (id_usuario) => {
+
+    let cliente,
+        resultado
+    try {
+
+        cliente = await pool.connect();
+
+        resultado = await cliente.query(queriesAll.querieSelectmyEvent, [id_usuario]);
+
+    } catch (error) {
+        console.log(error)
+        throw new Error('error de conexion')
+    } finally {
+
+        cliente.release()
+    }
+    return resultado.rows
+}
+
+
 
 
 
@@ -131,5 +152,6 @@ module.exports={
     getEventReservas,
     getSelectReserva,
     putReserva,
-    deleteReserva
+    deleteReserva,
+    getMyReservas
 }

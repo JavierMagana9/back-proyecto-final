@@ -5,31 +5,42 @@ const stripe = new Stripe('sk_test_51OmgPMCmZfq7z36s0bbAiXm8l38UGRptqo7bZadRc2n1
 
 const createSessionSub = async (req, res) => {
 
+    // const prices = await stripe.prices.list()
+    
+    // console.log(prices.data)
+
     const session = await stripe.checkout.sessions.create({
+        mode:"subscription",
+        payment_method_types:["card"],
         line_items: [
             {
-                price_data: {
-                    product_data: {
-                        name: 'Sala de ensayo Fija Mensual',
-                        description: "para adquirir sala fija"
-                    },
-                    currency: 'eur',
-                    unit_amount:40000, //el precio se coloca en centavos
-                },
-                quantity: 1,
-             
+                price:'price_1OqdKdCmZfq7z36sRz6BdUiA',
+                quantity:1,
+
             }
         ],
-        mode: 'subscription',
         success_url: 'http://localhost:5173/profile'
+
     })
-
-
-    // console.log(session)
+    
+    console.log(session)
     return res.json(session)
 }
 
 
+const verSubscriptores=async(req,res)=>{
+
+    const subscriptions = await stripe.subscriptions.list({
+        limit: 3,
+      });
+
+      
+      return res.json(subscriptions)
+
+}
+
+
 module.exports = {
-    createSessionSub
+    createSessionSub,
+    verSubscriptores
 }
